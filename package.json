@@ -1,0 +1,20 @@
+{
+  "name": "reporter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Collects all the data and reports them to the server",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opsvent/reporter.git"
+  },
+  "author": "Opsvent <contact@opsvent.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/opsvent/reporter/issues"
+  },
+  "homepage": "https://github.com/opsvent/reporter#readme"
+}

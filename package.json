@@ -5,7 +5,15 @@
   "description": "Collects all the data and reports them to the server",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node --project ./tsconfig.json src/index.ts",
+    "build": "rimraf dist && cross-env NODE_ENV=production tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "esw --color --ext .ts src",
+    "lint:fix": "esw --color --fix --ext .ts src",
+    "lint:watch": "esw --color --fix --watch --cache --ext .ts src",
+    "release": "standard-version",
+    "release:pre": "standard-version --prerelease"
   },
   "repository": {
     "type": "git",
@@ -16,5 +24,68 @@
   "bugs": {
     "url": "https://github.com/opsvent/reporter/issues"
   },
-  "homepage": "https://github.com/opsvent/reporter#readme"
+  "homepage": "https://github.com/opsvent/reporter#readme",
+  "devDependencies": {
+    "@types/node": "^18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-watch": "^8.0.0",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
+    "standard-version": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "standard-version": {
+    "scripts": {
+      "prerelease": "git fetch --all --tags"
+    },
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "imp",
+        "section": "Improvements"
+      },
+      {
+        "type": "ci",
+        "section": "Build/CI"
+      },
+      {
+        "type": "chore",
+        "hidden": true
+      },
+      {
+        "type": "docs",
+        "section": "Documentation"
+      },
+      {
+        "type": "refactor",
+        "section": "Refactor"
+      },
+      {
+        "type": "test",
+        "section": "Testing"
+      },
+      {
+        "type": "perf",
+        "section": "Performance"
+      },
+      {
+        "type": "intern",
+        "section": "Internal"
+      }
+    ]
+  }
 }

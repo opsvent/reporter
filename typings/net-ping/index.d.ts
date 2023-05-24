@@ -1,6 +1,7 @@
 declare module 'net-ping' {
 	export interface PingSession {
 		pingHost: (target: string, cb: (error: Error | null, target: string, sent: number, rcvd: number) => void) => void;
+		close: () => void;
 	}
 
 	enum NetworkProtocol {

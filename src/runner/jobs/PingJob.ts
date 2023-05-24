@@ -33,6 +33,7 @@ class PingJob extends Job {
 
 		return new Promise<JobResult>(resolve => {
 			session.pingHost(this.definition.endpoint, err => {
+				session.close();
 				if (!err) {
 					resolve(this.result.ok());
 					return;

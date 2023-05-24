@@ -12,7 +12,7 @@ export type JobErrorHandler = (error: Error) => void;
 
 abstract class Job {
 	public readonly definition: JobDefinition;
-	protected readonly id: string;
+	public readonly id: string;
 
 	constructor(definition: JobDefinition) {
 		this.definition = definition;

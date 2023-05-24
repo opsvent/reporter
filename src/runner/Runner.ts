@@ -44,6 +44,10 @@ class Runner {
 							return this.report(job, result);
 						},
 						error => {
+							this.logger.warn('Job failed to execute', {
+								job: job.id,
+								error: error.message
+							});
 							this.report(job, {
 								ok: false,
 								message: 'Error: ' + error.message

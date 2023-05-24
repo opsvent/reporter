@@ -22,6 +22,8 @@ const main = async () => {
 		log.info('Startup sequence completed');
 	} catch (e) {
 		log.error('Failed to start up', { exception: e });
+		// eslint-disable-next-line no-console
+		console.log(e);
 		exit();
 	}
 };

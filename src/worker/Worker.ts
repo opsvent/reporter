@@ -49,6 +49,8 @@ class Worker {
 	public async stop() {
 		clearInterval(this.generationWatchInterval ?? undefined);
 		this.generationWatchInterval = null;
+
+		this.runner.unscheduleAllJobs();
 	}
 
 	private async fetchJobDefinitions() {

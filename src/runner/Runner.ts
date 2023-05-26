@@ -25,47 +25,40 @@ class Runner {
 	}
 
 	public scheduleJobs(jobDefinitions: JobDefinition[]) {
-		const currentJobs = new Set<string>();
+		this.unscheduleAllJobs();
 
 		for (const jobDefinition of jobDefinitions) {
 			const jobId = `job_${jobDefinition.type}_${jobDefinition.id}`;
-			currentJobs.add(jobId);
+			this.logger.debug('Scheduling new job', { job: jobId });
+			this.scheduledJobs.add(jobId);
 
-			try {
-				this.scheduler.getById(jobId);
-				// job already running, don't disturb it
-			} catch {
-				// create new job
-				this.logger.debug('Scheduling new job', { job: jobId });
-				const job = JobBuilder(jobDefinition);
-				this.scheduler.addSimpleIntervalJob(
-					job.registerJob(
-						result => {
-							return this.report(job, result);
-						},
-						error => {
-							this.logger.warn('Job failed to execute', {
-								job: job.id,
-								error: error.message
-							});
-							this.report(job, {
-								ok: false,
-								message: 'Error: ' + error.message
-							});
-						}
-					)
-				);
-			}
+			// create new job
+			const job = JobBuilder(jobDefinition);
+			this.scheduler.addSimpleIntervalJob(
+				job.registerJob(
+					result => {
+						return this.report(job, result);
+					},
+					error => {
+						this.logger.warn('Job failed to execute', {
+							job: job.id,
+							error: error.message
+						});
+						this.report(job, {
+							ok: false,
+							message: 'Error: ' + error.message
+						});
+					}
+				)
+			);
 		}
+	}
 
-		// stop jobs that are unscheduled now
+	public unscheduleAllJobs() {
 		this.scheduledJobs.forEach(jobId => {
-			if (!currentJobs.has(jobId)) {
-				// unschedule job
-				this.logger.debug('Unscheduling job', { job: jobId });
-				this.scheduler.removeById(jobId);
-				this.scheduledJobs.delete(jobId);
-			}
+			this.logger.debug('Unscheduling job', { job: jobId });
+			this.scheduler.removeById(jobId);
+			this.scheduledJobs.delete(jobId);
 		});
 	}
 }

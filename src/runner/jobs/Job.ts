@@ -44,7 +44,7 @@ abstract class Job {
 		return new SimpleIntervalJob(
 			{ seconds: this.definition.frequency, runImmediately: true },
 			this.buildTask(resultHandler, errorHandler),
-			{ id: this.id }
+			{ id: this.id, preventOverrun: true }
 		);
 	}
 }

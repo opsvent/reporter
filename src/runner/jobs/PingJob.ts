@@ -11,7 +11,7 @@ import Job, { JobResult } from './Job.js';
 class PingJob extends Job {
 	public readonly definition!: PingJobDefinition;
 
-	private static sessionIdCounter = 1;
+	private static sessionIdCounter = process.pid % 65535;
 
 	private static getSessionId(): number {
 		if (PingJob.sessionIdCounter > 65535) {

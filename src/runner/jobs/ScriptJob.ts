@@ -130,11 +130,15 @@ class ScriptJob extends Job {
 						'[Script Runner] Syntax Error: ' + e.message
 					);
 				});
-			await script.run(ctx).catch(e => {
-				throw new Error(
-					'[Script Runner] Failed to execute script: ' + e.message
-				);
-			});
+			await script
+				.run(ctx, {
+					timeout: 500
+				})
+				.catch(e => {
+					throw new Error(
+						'[Script Runner] Failed to execute script: ' + e.message
+					);
+				});
 
 			this.exposeGlobals(ctx);
 
@@ -143,7 +147,7 @@ class ScriptJob extends Job {
 				reference: true
 			});
 
-			if (checkFn.typeof == 'undefined') {
+			if (checkFn.typeof != 'function') {
 				throw new Error(
 					'[Script Runner] Your code should expose a check function in the global space (async function check(){ ... })'
 				);

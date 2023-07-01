@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/opsvent/reporter/compare/v0.1.1...v0.1.2) (2023-07-01)
+
+
+### Bug Fixes
+
+* **PingJob:** Avoid collision if multiple instances are running on the same machine ([607a653](https://github.com/opsvent/reporter/commit/607a653fb662106a176bdf6054167bebf25738a2))
+* **ScriptJob:** Check for function type and timeout on initial script run ([4f16d71](https://github.com/opsvent/reporter/commit/4f16d7125510ca989f8a2c8c0de819b7005ea9a5))
+
 ### 0.1.1 (2023-05-26)
 
 
